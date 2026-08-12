@@ -603,9 +603,9 @@ footer p{margin-top:10px;color:var(--muted);font-size:11px}
     <p class="muted center" style="margin-top:15px"></p>
 
     <div class="timeline">
-      <div class="event"><span class="dot"></span><div class="AUGUST 2023">The beginning</div><h4>First time we met</h4><p>Mera K.V mein admission,and teri first performance....</p></div>
-      <div class="event"><span class="dot"></span><div class="MARCH 2026">A little later</div><h4>Our first real conversation</h4><p>First time you confessed out of frustration....</p></div>
-      <div class="event"><span class="dot"></span><div class="KABADDI DAYS">Those special days</div><h4>When I knew you were special</h4><p>Main start of our story .... Intro , talks ,,, milna , dekhna .....</p></div>
+      <div class="event"><span class="dot"></span><div class="AUGUST 2023">The beginning</div><h4>First time I saw you</h4><p>Mera K.V mein admission,and teri first performance....</p></div>
+      <div class="event"><span class="dot"></span><div class="MARCH 2026">This year</div><h4>Our first real conversation</h4><p>First time you confessed out of frustration....</p></div>
+      <div class="event"><span class="dot"></span><div class="KABADDI DAYS">Kabaddi days</div><h4>When I knew you were special</h4><p>Main start of our story .... Intro , talks ,,, milna , dekhna .....</p></div>
       <div class="event"><span class="dot"></span><div class="13-08-2026 , TERA B'DAY">Today</div><h4>Another chapter</h4><p>And here we are, celebrating you. I hope there are many more chapters.</p></div>
     </div>
   </div>
@@ -732,27 +732,16 @@ function goTo(id){
    COUNTDOWN
    ========================================================= */
 
+const birthday = new Date(CONFIG.birthday);
+
 function updateCountdown(){
   const now = new Date();
-
-  // Birthday has arrived
-  if (
-    now.getMonth() === birthday.getMonth() &&
-    now.getDate() === birthday.getDate()
-  ) {
-    document.getElementById("days").textContent = "IT";
-    document.getElementById("hours").textContent = "'S";
-    document.getElementById("minutes").textContent = "UR";
-    document.getElementById("seconds").textContent = "BDAY";
-    return;
-  }
-
   let diff = birthday - now;
 
-  // If birthday has passed this year, stop the countdown
-  if(diff < 0){
-    document.getElementById("days").textContent = "IT";
-    document.getElementById("hours").textContent = "'S";
+  // Birthday has arrived
+  if(diff <= 0){
+    document.getElementById("days").textContent = "🎂";
+    document.getElementById("hours").textContent = "IT'S";
     document.getElementById("minutes").textContent = "UR";
     document.getElementById("seconds").textContent = "BDAY";
     return;
@@ -769,6 +758,9 @@ function updateCountdown(){
   document.getElementById("minutes").textContent = String(mins).padStart(2,"0");
   document.getElementById("seconds").textContent = String(seconds).padStart(2,"0");
 }
+
+updateCountdown();
+setInterval(updateCountdown,1000);
 
 
 /* =========================================================
@@ -1091,7 +1083,7 @@ function createHearts(amount=20){
 function celebrate(){
   createConfetti(260);
   createHearts(90);
-  showToast("Happy birthday, beautiful ♥");
+  showToast("Happy birthday, JHATU ♥");
 }
 
 
