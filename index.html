@@ -732,17 +732,30 @@ function goTo(id){
    COUNTDOWN
    ========================================================= */
 
-const birthday = new Date(CONFIG.birthday);
-
 function updateCountdown(){
   const now = new Date();
+
+  // Birthday has arrived
+  if (
+    now.getMonth() === birthday.getMonth() &&
+    now.getDate() === birthday.getDate()
+  ) {
+    document.getElementById("days").textContent = "IT";
+    document.getElementById("hours").textContent = "'S";
+    document.getElementById("minutes").textContent = "UR";
+    document.getElementById("seconds").textContent = "BDAY";
+    return;
+  }
+
   let diff = birthday - now;
 
-  // If the birthday date has passed this year, count toward next year.
+  // If birthday has passed this year, stop the countdown
   if(diff < 0){
-    const next = new Date(birthday);
-    next.setFullYear(next.getFullYear() + 1);
-    diff = next - now;
+    document.getElementById("days").textContent = "IT";
+    document.getElementById("hours").textContent = "'S";
+    document.getElementById("minutes").textContent = "UR";
+    document.getElementById("seconds").textContent = "BDAY";
+    return;
   }
 
   const sec = Math.floor(diff / 1000);
@@ -756,8 +769,6 @@ function updateCountdown(){
   document.getElementById("minutes").textContent = String(mins).padStart(2,"0");
   document.getElementById("seconds").textContent = String(seconds).padStart(2,"0");
 }
-updateCountdown();
-setInterval(updateCountdown,1000);
 
 
 /* =========================================================
